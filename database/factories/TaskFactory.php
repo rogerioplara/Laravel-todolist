@@ -18,12 +18,20 @@ class TaskFactory extends Factory
      */
     public function definition(): array
     {
+        $user = User::all()->random();
+
+        // Para popular as tasks somente com usuários que tem sua categoria, é feito esse while
+        // que permite que sejam criados novos usuários, caso a task esteja com user_id vazio
+        while (count($user->categories) == 0) {
+            $user = User::all()->random();
+        }
+
         return [
             'title' => fake()->text(30),
             'description' => fake()->text(100),
             'due_date' => fake()->dateTime(),
-            'user_id' => User::all()->random(),
-            'category_id' => Category::all()->random(),
+            'user_id' => $user,
+            'category_id' => $user->categories->random(),
         ];
     }
 }
