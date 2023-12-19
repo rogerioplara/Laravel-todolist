@@ -28,6 +28,7 @@ class TaskFactory extends Factory
 
         return [
             'title' => fake()->text(30),
+            'is_done' => fake()->boolean(),
             'description' => fake()->text(100),
             'due_date' => fake()->dateTime(),
             'user_id' => $user,

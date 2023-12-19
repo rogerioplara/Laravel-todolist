@@ -21,12 +21,7 @@
 
         <div class="content">
             <nav>
-                @if (!empty($btnHref))
-                    <a href="{{ $btnHref ?? '' }}" class="btn btn-primary">
-                        {{ $btnText ?? '' }}
-                    </a>
-                @endif
-
+                {{ $btn ?? null }}
             </nav>
 
             <main>
