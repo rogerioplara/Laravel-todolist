@@ -10,23 +10,17 @@
         <h1>Criar tarefa</h1>
 
         <form action="">
-            <div class="inputArea">
-                <label for="title">
-                    Título da task
-                </label>
-                <input name="title" required placeholder="Digite o título da tarefa" />
-            </div>
-            <div class="inputArea">
-                <label for="date">
-                    Data de Realização
-                </label>
-                <input type="date" name="due_date" required />
-            </div>
+
+            <x-form.text_input name="title" label="Título da tarefa" required="required"
+                placeholder="Digite o título da tarefa" />
+
+            <x-form.text_input name="due_date" required="required" type="date" label="Data de realização" />
+
             <div class="inputArea">
                 <label for="category">
                     Categoria
                 </label>
-                <select name="category" required>
+                <select id="category" name="category" required>
                     <option selected disabled value="">Selecione a categoria</option>
                 </select>
             </div>
@@ -36,6 +30,11 @@
                 </label>
                 <textarea placeholder="Digite uma descrição para a tarefa"></textarea>
             </div>
+
+            <div class="inputArea">
+                <button type="submit" class="btn btn-primary">Criar tarefa</button>
+            </div>
+
         </form>
 
     </section>
