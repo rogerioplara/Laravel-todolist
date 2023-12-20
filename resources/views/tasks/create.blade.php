@@ -16,24 +16,14 @@
 
             <x-form.text_input name="due_date" required="required" type="date" label="Data de realização" />
 
-            <div class="inputArea">
-                <label for="category">
-                    Categoria
-                </label>
-                <select id="category" name="category" required>
-                    <option selected disabled value="">Selecione a categoria</option>
-                </select>
-            </div>
-            <div class="inputArea">
-                <label for="description">
-                    Descrição da tarefa
-                </label>
-                <textarea placeholder="Digite uma descrição para a tarefa"></textarea>
-            </div>
+            <x-form.select_input name="category" label="Categoria" placeholder="">
+                <option>Valor qualquer</option>
+            </x-form.select_input>
 
-            <div class="inputArea">
-                <button type="submit" class="btn btn-primary">Criar tarefa</button>
-            </div>
+            <x-form.textarea_input name="description" placeholder="Digite a descrição da tarefa"
+                label="Descrição da tarefa" />
+
+            <x-form.form_btn resetTxt="Resetar" submitTxt="Criar Tarefa" />
 
         </form>
 
