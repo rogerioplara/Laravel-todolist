@@ -23,11 +23,29 @@ class TaskController extends Controller
 
     public function edit(Request $request)
     {
-        return view('tasks.edit');
+        $id = $request->id;
+        $task = Task::find($id);
+
+        // se a task com o id passado não existir, retorna para a home
+        if (!$task) {
+            return redirect(route('home'));
+        }
+
+        $data['task'] = $task;
+        $categories = Category::all();
+
+        $data['categories'] = $categories;
+
+
+        return view('tasks.edit', $data);
     }
     public function delete(Request $request)
     {
-        //deleta e redireciona de volta para a home
+        $id = $request->id;
+        $task = Task::find($id);
+        if ($task) {
+            $task->delete();
+        }
         return redirect(route('home'));
     }
 
@@ -37,6 +55,19 @@ class TaskController extends Controller
         // completando os dados para gravar no banco (gambiarra)
         $task['user_id'] = 1;
         $dbTask = Task::create($task);
+        return redirect(route('home'));
+    }
+
+    public function edit_action(Request $request)
+    {
+        $request_data = $request->only('title', 'due_date', 'category_id', 'description');
+
+        $task = Task::find($request->id);
+        if (!$task) {
+            return redirect(route('home'));
+        }
+        $task->update($request_data);
+        $task->save();
         return redirect(route('home'));
     }
 }

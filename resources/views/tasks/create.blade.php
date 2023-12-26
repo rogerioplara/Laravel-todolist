@@ -6,7 +6,7 @@
         </a>
     </x-slot:btn>
 
-    <section id="create_task_section">
+    <section id="task_section">
         <h1>Criar tarefa</h1>
 
         <form method="POST" action="{{ route('task.create_action') }}">
@@ -15,7 +15,7 @@
             <x-form.text_input name="title" label="Título da tarefa" required="required"
                 placeholder="Digite o título da tarefa" />
 
-            <x-form.text_input name="due_date" required="required" type="date" label="Data de realização" />
+            <x-form.text_input name="due_date" required="required" type="datetime-local" label="Data de realização" />
 
             <x-form.select_input name="category_id" label="Categoria" placeholder="">
                 @foreach ($categories as $category)
