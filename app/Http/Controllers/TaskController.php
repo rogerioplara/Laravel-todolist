@@ -62,6 +62,10 @@ class TaskController extends Controller
     {
         $request_data = $request->only('title', 'due_date', 'category_id', 'description');
 
+        // passagem do checkbox, do contrário quando é false não é passado nada
+        $request_data['is_done'] = $request->is_done ? true : false;
+
+
         $task = Task::find($request->id);
         if (!$task) {
             return redirect(route('home'));

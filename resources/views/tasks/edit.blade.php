@@ -12,6 +12,8 @@
             @csrf
             <input type="hidden" name="id" value="{{ $task->id }}">
 
+            <x-form.checkbox_input name="is_done" label="Tarefa realizada?" checked="{{ $task->is_done }}" />
+
             <x-form.text_input name="title" label="Título da tarefa" required="required"
                 placeholder="Digite o título da tarefa" value="{{ $task->title }}" />
 
