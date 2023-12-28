@@ -8,8 +8,14 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function update(Request $request)
     {
+        // método de atualização do status da task, pegando o status passado na requisição pela função js no home
+        $task = Task::findOrFail($request->taskId);
+        $task->is_done = $request->status;
+        $task->save();
+        // esse retorno vai servir para que, se houver falha na atualização do checkbox, o status retorne ao anterior - ver o resultado no home
+        return ['success' => true];
     }
 
     public function create(Request $request)
