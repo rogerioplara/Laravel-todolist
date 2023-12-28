@@ -4,17 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        // Auth::check() mais indicado para fazer a checagem se o usuário está logado ou não
+        if (Auth::check()) {
+            return redirect()->route('home');
+        }
         return view('login');
     }
 
     public function register(Request $request)
     {
+        // Auth::user faz um select->all() e busca todos os dados do usuário
+        // faz sentido se for utilizar os dados do usuário posteriormente nesse método
+        if (Auth::user()) {
+            return redirect()->route('home');
+        }
         return view('register');
     }
 
@@ -51,6 +61,15 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|min:6',
         ]);
-        dd($validator);
+
+        if (Auth::attempt($validator)) {
+            return redirect()->route('home');
+        }
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect()->route('login');
     }
 }
