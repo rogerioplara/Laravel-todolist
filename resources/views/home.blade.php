@@ -40,8 +40,10 @@
 
     <section class="list">
         <div class="list-header">
-            <select class="list-header-select">
-                <option value="1">Todas as tarefas</option>
+            <select class="list-header-select" onchange="changeTaskStatusFilter(this)">
+                <option value="all_task">Todas as tarefas</option>
+                <option value="task_pending">Tarefas pendentes</option>
+                <option value="task_done">Tarefas realizadas</option>
             </select>
         </div>
 
@@ -53,6 +55,30 @@
         </div>
 
     </section>
+
+    <script>
+        // funções do filtro de tarefas
+        function changeTaskStatusFilter(e) {
+            showAllTasks();
+            if (e.value == 'task_pending') {
+                showAllTasks();
+                document.querySelectorAll('.task_done').forEach(function(e) {
+                    e.style.display = 'none';
+                })
+            } else if (e.value == 'task_done') {
+                showAllTasks();
+                document.querySelectorAll('.task_pending').forEach(function(e) {
+                    e.style.display = 'none';
+                })
+            }
+        }
+
+        function showAllTasks() {
+            document.querySelectorAll('.task').forEach(function(e) {
+                e.style.display = 'flex';
+            })
+        }
+    </script>
 
     <script>
         // função que verifica se o elemento foi marcado ou não - retorna um boolean

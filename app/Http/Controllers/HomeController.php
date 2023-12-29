@@ -18,12 +18,16 @@ class HomeController extends Controller
             $filteredDate = date('Y-m-d');
         }
 
+        // carbon é uma biblioteca de datas utilizada no laravel
         $carbonDate = Carbon::createFromDate($filteredDate);
 
+
         // controle da data pelos botões 
-        $data['date_as_string'] = $carbonDate->format('d M');
+        $data['date_as_string'] = $carbonDate->translatedFormat('d') . ' ' . ucfirst($carbonDate->translatedFormat('M'));
+
         $data['date_prev_button'] = $carbonDate->addDay(-1)->format('Y-m-d');
-        $data['date_next_button'] = $carbonDate->addDay()->format('Y-m-d');
+        // workaround pois quando passa pelo addDay(-1) ele subtrai, independente da soma
+        $data['date_next_button'] = $carbonDate->addDay(2)->format('Y-m-d');
 
 
         // seleciona todas as tasks que tem a data selecionada

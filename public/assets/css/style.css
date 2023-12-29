@@ -149,7 +149,9 @@ h2 {
     margin-top: 20px;
 }
 
-.task {
+.task,
+.task_pending,
+.task_done {
     display: flex;
     flex-direction: row;
     align-items: center;
