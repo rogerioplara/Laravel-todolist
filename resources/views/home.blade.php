@@ -101,6 +101,7 @@
             result = await rawResult.json();
             if (result.success) {
                 alert('Task atualizada com sucesso');
+                location.reload();
             } else {
                 element.checked = !status;
             }
